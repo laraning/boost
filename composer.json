@@ -1,12 +1,11 @@
 {
-    "name": "waygou/boost",
+    "name": "laraning/boost",
     "description": "Utilities package that gives you an extra-boost in your Laravel applications development.",
     "type": "library",
     "keywords": [
         "utilities",
         "laraning",
         "laravel",
-        "waygou",
         "php"
     ],
     "require": {
@@ -18,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Waygou\\Boost\\": "src/"
+            "Laraning\\Boost\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -27,7 +26,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Waygou\\Boost\\Providers\\BaseServiceProvider"
+                "Laraning\\Boost\\Providers\\BaseServiceProvider"
             ]
         }
     },
