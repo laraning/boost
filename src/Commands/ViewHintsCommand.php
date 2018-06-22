@@ -6,15 +6,16 @@ use Illuminate\Console\Command;
 
 class ViewHintsCommand extends Command
 {
-
     /**
      * Table headers.
+     *
      * @var array
      */
     protected $headers = ['Hint', 'Path'];
 
     /**
      * View hints.
+     *
      * @var array
      */
     protected $hints = [];
