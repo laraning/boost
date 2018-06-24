@@ -10,6 +10,6 @@ if (!function_exists('d')) {
     {
         foreach ($args as $x) {
             (new Dumper())->dump($x);
-        };
-    };
-};
+        }
+    }
+}
