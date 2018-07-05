@@ -4,6 +4,8 @@ namespace Laraning\Boost\Providers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laraning\Boost\Commands\ViewHintsCommand;
 
@@ -11,6 +13,7 @@ class BaseServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->bootBladeDirectives();
     }
 
     public function register()
@@ -38,5 +41,27 @@ class BaseServiceProvider extends ServiceProvider
                   ->each(function ($macro, $path) {
                       require_once $path;
                   });
+    }
+
+    protected function bootBladeDirectives()
+    {
+        Blade::if('action', function ($action) {
+            if (Route::getCurrentRoute()->getActionMethod() == $action) {
+                return $action;
+            }
+        });
+
+        Blade::if('env', function ($env) {
+            return app()->environment($env);
+        });
+
+        Blade::directive('pushonce', function ($expression) {
+            $var = '$__env->{"__pushonce_" . md5(__FILE__ . ":" . __LINE__)}';
+            return "<?php if(!isset({$var})): {$var} = true; \$__env->startPush({$expression}); ?>";
+        });
+
+        Blade::directive('endpushonce', function ($expression) {
+            return '<?php $__env->stopPush(); endif; ?>';
+        });
     }
 }
