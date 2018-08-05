@@ -28,7 +28,7 @@
         "laravel": {
             "providers": [
                 "Laraning\\Boost\\Providers\\BaseServiceProvider",
-                "Laraning\\Boost\\Providers\\OnedriveServiceProvider",
+                "Laraning\\Boost\\Providers\\OnedriveServiceProvider"
             ]
         }
     },
