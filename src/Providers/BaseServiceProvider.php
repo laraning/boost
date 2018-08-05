@@ -3,9 +3,9 @@
 namespace Laraning\Boost\Providers;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laraning\Boost\Commands\ViewHintsCommand;
 
@@ -57,6 +57,7 @@ class BaseServiceProvider extends ServiceProvider
 
         Blade::directive('pushonce', function ($expression) {
             $var = '$__env->{"__pushonce_" . md5(__FILE__ . ":" . __LINE__)}';
+
             return "<?php if(!isset({$var})): {$var} = true; \$__env->startPush({$expression}); ?>";
         });
 
