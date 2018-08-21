@@ -19,8 +19,10 @@ if (!function_exists('d')) {
 if (!function_exists('path_separators')) {
     /**
      * Transforms your path with the right system separators.
-     * @param  string $path Your path.
-     * @return string       Your path but with the right separators.
+     *
+     * @param string $path Your path.
+     *
+     * @return string Your path but with the right separators.
      */
     function path_separators($path)
     {
