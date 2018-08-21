@@ -31,7 +31,7 @@ trait Migrateable
 
         foreach ($wildcard as $card) {
             $imported = glob(base_path("database/migrations/*{$card}*.php"));
-            $pending = glob(path_separators($rootPath . "/*{$card}*"));
+            $pending = glob(path_separators($rootPath."/*{$card}*"));
 
             if (count($imported) == 0) {
                 // Add migration files with that wildcard.
@@ -42,16 +42,16 @@ trait Migrateable
                     $file = explode('.', $filename)[0];
                     $timestamp = date('Y_m_d_His', time());
                     $this->migrationFiles[$path] = $this->app->databasePath()."/migrations/{$timestamp}_{$file}.php";
-                };
-            };
-        };
+                }
+            }
+        }
     }
 
     protected function publishMigrations()
     {
         $this->loadMigrationFiles($this->migrationPath, $this->migrations);
         if (count($this->migrationFiles) > 0) {
-            $this->publishes($this->migrationFiles, kebab_case(config('app.name') . '-schema-updates'));
-        };
+            $this->publishes($this->migrationFiles, kebab_case(config('app.name').'-schema-updates'));
+        }
     }
 }
