@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Debug\Dumper;
+
 if (!function_exists('d')) {
     /**
      * Same as dd() but doesn't die.
@@ -14,36 +16,49 @@ if (!function_exists('d')) {
     }
 }
 
-if (!function_exists('get_uri_collection')) {
+if (!function_exists('path_separators')) {
     /**
-     * Gets the uri collection (segments).
-     *
-     * @return \Illuminate\Support\Collection
+     * Transforms your path with the right system separators.
+     * @param  string $path Your path.
+     * @return string       Your path but with the right separators.
      */
-    function get_uri_collection()
+    function path_separators($path)
     {
-        $router = app()->make('router');
-        $segments = collect(explode('/', $router->getCurrentRoute()->uri));
+        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+        $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);
 
-        return $segments;
+        return $path;
     }
 }
 
-if (!function_exists('get_uri_collection_without_bindings')) {
+if (!function_exists('public_ip')) {
     /**
-     * Gets the uri collection without bindings.
+     * Get server/localhost public IP.
      *
-     * @return \Illuminate\Support\Collection
+     * @return string
      */
-    function get_uri_collection_without_bindings()
+    function public_ip()
     {
-        $uri = get_uri_collection();
+        // In case it's a localhost IP then retrieve the location from the public internet router IP.
+        return request()->ip() == '127.0.0.1' ?
+            @file_get_contents('https://api.ipify.org') :
+            request()->ip();
+    }
+}
 
-        // Remove { .. } items.
-        $segments = $uri->filter(function ($value, $key) {
-            return $value[0] != '{';
-        });
+if (!function_exists('delete_files')) {
+    function delete_files($collection)
+    {
+        if ($collection->count() > 0) {
+            $collection->each(function ($item) {
+                if (is_file($item)) {
+                    File::delete($item);
+                }
 
-        return $segments;
+                if (is_dir($item)) {
+                    File::deleteDirectory($item);
+                }
+            });
+        }
     }
 }

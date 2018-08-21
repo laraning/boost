@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraning\Boost\Providers;
+namespace Laraning\Boost;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laraning\Boost\Commands\ViewHintsCommand;
 
-class BaseServiceProvider extends ServiceProvider
+class BoostServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -53,16 +53,6 @@ class BaseServiceProvider extends ServiceProvider
 
         Blade::if('env', function ($env) {
             return app()->environment($env);
-        });
-
-        Blade::directive('pushonce', function ($expression) {
-            $var = '$__env->{"__pushonce_" . md5(__FILE__ . ":" . __LINE__)}';
-
-            return "<?php if(!isset({$var})): {$var} = true; \$__env->startPush({$expression}); ?>";
-        });
-
-        Blade::directive('endpushonce', function ($expression) {
-            return '<?php $__env->stopPush(); endif; ?>';
         });
     }
 }
