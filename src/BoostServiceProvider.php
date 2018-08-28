@@ -34,7 +34,7 @@ class BoostServiceProvider extends ServiceProvider
     protected function registerMacros()
     {
         // Include all files from the Macros folder.
-        Collection::make(glob(__DIR__.'/../Macros/*.php'))
+        Collection::make(glob(__DIR__.'/Macros/*.php'))
                   ->mapWithKeys(function ($path) {
                       return [$path => pathinfo($path, PATHINFO_FILENAME)];
                   })

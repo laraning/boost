@@ -9,7 +9,7 @@ namespace Laraning\Boost\Traits;
  * REQUIREMENTS:
  *
  * On your Service Provider, please add:
- * use Migrateable;
+ * use Migratable;
  * protected $migrationPath = __DIR__ . '/../database/migrations/';
  * protected $migrations = ['laraning', 'version_0_1_0']; // No need to put "*"!
  *
@@ -21,7 +21,7 @@ namespace Laraning\Boost\Traits;
  * with only the migration files missing!
  * If there aren't new migration files, then it don't generate a tag.
  */
-trait Migrateable
+trait Migratable
 {
     protected $migrationFiles = [];
 
