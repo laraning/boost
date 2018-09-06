@@ -9,8 +9,10 @@ trait CanCreateMany
 {
     /**
      * Creates many Models.
-     * @param  array  $datasets The data array of arrays.
-     * @return array           The created models array.
+     *
+     * @param array $datasets The data array of arrays.
+     *
+     * @return array The created models array.
      */
     public static function createMany(array $datasets) : array
     {
@@ -18,7 +20,7 @@ trait CanCreateMany
 
         foreach ($datasets as $dataset) {
             $models[] = static::create($dataset);
-        };
+        }
 
         return $models;
     }
