@@ -25,7 +25,7 @@ trait Migratable
 {
     protected $migrationFiles = [];
 
-    protected function loadMigrationFiles($rootPath, $wildcard)
+    protected function loadMigrationFiles($rootPath, string $wildcard)
     {
         $wildcard = (array) $wildcard;
 
@@ -47,11 +47,15 @@ trait Migratable
         }
     }
 
-    protected function publishMigrations()
+    protected function publishMigrations(string $tag = null)
     {
+        if (is_null($tag)) {
+            $tag = config('app.name');
+        };
+
         $this->loadMigrationFiles($this->migrationPath, $this->migrations);
         if (count($this->migrationFiles) > 0) {
-            $this->publishes($this->migrationFiles, kebab_case(config('app.name').'-schema-updates'));
-        }
+            $this->publishes($this->migrationFiles, kebab_case($tag.'-schema-updates-schema-updates'));
+        };
     }
 }
