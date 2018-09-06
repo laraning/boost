@@ -25,7 +25,7 @@ trait Migratable
 {
     protected $migrationFiles = [];
 
-    protected function loadMigrationFiles($rootPath, string $wildcard)
+    protected function loadMigrationFiles($rootPath, $wildcard)
     {
         $wildcard = (array) $wildcard;
 
@@ -54,6 +54,7 @@ trait Migratable
         };
 
         $this->loadMigrationFiles($this->migrationPath, $this->migrations);
+
         if (count($this->migrationFiles) > 0) {
             $this->publishes($this->migrationFiles, kebab_case($tag) . '-schema-updates-schema-updates');
         };
