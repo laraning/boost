@@ -51,11 +51,11 @@ trait Migratable
     {
         if (is_null($tag)) {
             $tag = config('app.name');
-        };
+        }
 
         $this->loadMigrationFiles($this->migrationPath, $this->migrations);
         if (count($this->migrationFiles) > 0) {
             $this->publishes($this->migrationFiles, kebab_case($tag.'-schema-updates-schema-updates'));
-        };
+        }
     }
 }
