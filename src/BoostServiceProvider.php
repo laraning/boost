@@ -14,12 +14,28 @@ class BoostServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->bootBladeDirectives();
+
+        $this->loadTranslations();
+
+        $this->registerPublishing();
     }
 
     public function register()
     {
         $this->registerCommands();
         $this->registerMacros();
+    }
+
+    protected function registerPublishing()
+    {
+        $this->publishes([
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/boost'),
+        ], 'boost-translations');
+    }
+
+    protected function loadTranslations()
+    {
+        $this->loadTranslationsFrom(resource_path('lang/vendor/boost'), 'boost');
     }
 
     protected function registerCommands()
