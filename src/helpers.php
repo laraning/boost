@@ -1,21 +1,5 @@
 <?php
 
-use Illuminate\Support\Debug\Dumper;
-
-if (!function_exists('d')) {
-    /**
-     * Same as dd() but doesn't die.
-     *
-     * @param ... $args The arguments.
-     */
-    function d(...$args)
-    {
-        foreach ($args as $x) {
-            (new Dumper())->dump($x);
-        }
-    }
-}
-
 if (!function_exists('path_separators')) {
     /**
      * Transforms your path with the right system separators.
