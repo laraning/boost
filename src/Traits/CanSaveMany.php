@@ -15,7 +15,7 @@ trait CanSaveMany
      *
      * @return array The created models array.
      */
-    public static function saveMany(array $datasets) : array
+    public static function saveMany(array $datasets)
     {
         $models = [];
 
@@ -32,6 +32,6 @@ trait CanSaveMany
             $models[] = $model;
         }
 
-        return $models;
+        return collect($models);
     }
 }
